@@ -1,12 +1,20 @@
 let papers = [];
 
 fetch("data/publications.json")
-.then(r => r.json())
+.then(response => response.json())
 .then(data => {
 
 papers = data;
 
 render(papers);
+
+})
+.catch(error => {
+
+console.error(
+    "Could not load publications.json",
+    error
+);
 
 });
 
@@ -16,25 +24,47 @@ let html = "";
 
 list.forEach(p => {
 
-    html += `
+    html += 
+
     <div class="card mb-3">
 
-    <div class="card-body">
+        <div class="card-body">
 
-    <h5>${p.title}</h5>
+            <h5>
 
-    <p>
-    ${p.authors.join(", ")}
-    </p>
+                <a href="${p.url || '#'}"
+                   target="_blank">
 
-    <p>
-    ${p.journal} (${p.year})
-    </p>
+                    ${p.title}
+
+                </a>
+
+            </h5>
+
+            <p>
+
+                ${p.display_authors || ""}
+
+            </p>
+
+            <p>
+
+                ${p.journal || ""}
+
+                ${p.volume ? ", Vol. " + p.volume : ""}
+
+                ${p.pages ? ", " + p.pages : ""}
+
+                ${p.year ? " (" + p.year + ")" : ""}
+
+            </p>
+
+        </div>
 
     </div>
 
-    </div>
-    `;
+    ;
+
 });
 
 document.getElementById("papers")
@@ -43,7 +73,9 @@ document.getElementById("papers")
 }
 
 function showAll(){
+
 render(papers);
+
 }
 
 function showFirstAuthor(){
