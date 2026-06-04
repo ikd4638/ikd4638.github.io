@@ -1,4 +1,3 @@
-cat > js/publications.js <<'EOF'
 let papers = [];
 
 fetch("data/publications.json")
@@ -66,4 +65,3 @@ function showManyAuthors() {
         )
     );
 }
-EOF
