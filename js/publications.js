@@ -4,17 +4,14 @@ fetch("data/publications.json")
 .then(r => r.json())
 .then(data => {
 
-```
 papers = data;
 
 render(papers);
-```
 
 });
 
 function render(list){
 
-```
 let html = "";
 
 list.forEach(p => {
@@ -42,7 +39,6 @@ list.forEach(p => {
 
 document.getElementById("papers")
     .innerHTML = html;
-```
 
 }
 
@@ -52,25 +48,21 @@ render(papers);
 
 function showFirstAuthor(){
 
-```
 render(
     papers.filter(
         p => p.first_author
     )
 );
-```
 
 }
 
 function showManyAuthors(){
 
-```
 render(
     papers.filter(
         p => p.many_authors
     )
 );
-```
 
 }
 

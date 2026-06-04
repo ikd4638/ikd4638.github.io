@@ -1,11 +1,10 @@
 import json
 import re
 
-bibfile = "data/All-publications.bib"
+with open("data/All-publications.bib", "r", encoding="utf-8") as f:
+    text = f.read()
 
-with open(bibfile, "r", encoding="utf-8") as f:
-     text = f.read()
-
+# Split on BibTeX entries
 entries = re.split(r'@\w+\{', text)[1:]
 
 papers = []
@@ -13,46 +12,51 @@ papers = []
 for entry in entries:
 
     title = ""
-    authors = ""
-    year = ""
     journal = ""
+    year = ""
+    authors = []
 
-m = re.search(r'title\\s*=\\s*\\{(.*?)\\}', entry, re.S)
-if m:
-    title = m.group(1).replace("\\n", " ")
+    m = re.search(r'title\s*=\s*\{(.*?)\}', entry, re.S)
+    if m:
+        title = " ".join(m.group(1).replace("\n", " ").split())
 
-m = re.search(r'author\\s*=\\s*\\{(.*?)\\}', entry, re.S)
-if m:
-    authors = m.group(1)
+    m = re.search(r'journal\s*=\s*\{(.*?)\}', entry, re.S)
+    if m:
+        journal = m.group(1).strip()
 
-m = re.search(r'year\\s*=\\s*\\{(.*?)\\}', entry)
-if m:
-    year = m.group(1)
+    m = re.search(r'year\s*=\s*([0-9]{4})', entry)
+    if m:
+        year = m.group(1)
 
-m = re.search(r'journal\\s*=\\s*\\{(.*?)\\}', entry)
-if m:
-    journal = m.group(1)
+    m = re.search(r'author\s*=\s*\{(.*?)\},', entry, re.S)
+    if m:
+        authors = [a.strip() for a in m.group(1).split(" and ")]
 
-author_list = [a.strip() for a in authors.split(" and ")]
+    papers.append({
+        "title": title,
+        "authors": authors,
+        "year": year,
+        "journal": journal,
+        "first_author": (
+            len(authors) > 0 and "Dihingia" in authors[0]
+        ),
+        "many_authors": (
+            len(authors) > 10
+        )
+    })
 
-papers.append({
-    "title": title,
-    "authors": author_list,
-    "year": year,
-    "journal": journal,
-    "first_author":
-        len(author_list) > 0
-        and "Dihingia" in author_list[0],
+papers.sort(key=lambda p: str(p["year"]), reverse=True)
 
-    "many_authors":
-        len(author_list) > 10
-})
+with open("data/publications.json", "w", encoding="utf-8") as f:
+    json.dump(papers, f, indent=2, ensure_ascii=False)
 
-papers.sort(
-key=lambda x: x["year"],
-reverse=True
-)
+metrics = {
+    "total_publications": len(papers),
+    "first_author": sum(p["first_author"] for p in papers),
+    "many_authors": sum(p["many_authors"] for p in papers)
+}
 
-with open("data/publications.json", "w") as f:
-     json.dump(papers, f, indent=2)
+with open("data/metrics.json", "w", encoding="utf-8") as f:
+    json.dump(metrics, f, indent=2)
 
+print(f"Processed {len(papers)} papers")
