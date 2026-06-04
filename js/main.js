@@ -1,1 +1,20 @@
-fetch('data/metrics.json').then(r=>r.json()).then(d=>{pubs.innerText=d.total_publications;firstauthor.innerText=d.first_author;eht.innerText=d.eht_papers;citations.innerText=d.citations}).catch(()=>{});
+fetch("data/metrics.json")
+.then(response => response.json())
+.then(data => {
+
+    document.getElementById("pubs").textContent =
+        data.total_publications;
+
+    document.getElementById("firstauthor").textContent =
+        data.first_author;
+
+    document.getElementById("eht").textContent =
+        data.eht_papers;
+
+    document.getElementById("citations").textContent =
+        data.citations;
+
+})
+.catch(error => {
+    console.log("Could not load metrics:", error);
+});
