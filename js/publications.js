@@ -1,3 +1,1 @@
-fetch('data/publications.json').then(r=>r.json()).then(ps=>{
-document.getElementById('papers').innerHTML=ps.map(p=>`<p><b>${p.title}</b><br>${p.authors.join(', ')}</p>`).join('');
-});
+function load(mode){fetch('data/publications.json').then(r=>r.json()).then(ps=>{let p=ps;if(mode==='first')p=ps.filter(x=>x.first_author);if(mode==='eht')p=ps.filter(x=>x.eht);papers.innerHTML=p.map(x=>`<p><b>${x.title}</b></p>`).join('');});}load('all');
