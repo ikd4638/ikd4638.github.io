@@ -11,8 +11,7 @@ from datetime import datetime
 # FOR LOCAL TESTING ONLY - Remove this section when deploying!
 # NEVER commit this token to version control!
 # ============================================
-TOKEN = "2fE6RJyX9FxKvOJJZRSM8h9nazkTkVLWny3E1Bnr"
-#TOKEN = os.environ.get("ADS_API_TOKEN")
+TOKEN = os.environ.get("ADS_API_TOKEN")
 
 if not TOKEN:
     print("ERROR: ADS_API_TOKEN not found!")
