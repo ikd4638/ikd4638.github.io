@@ -8,12 +8,8 @@ fetch("data/metrics.json")
     document.getElementById("firstauthor").textContent =
         data.first_author;
 
-    document.getElementById("eht").textContent =
-        data.eht_papers;
-
-    document.getElementById("citations").textContent =
-        data.citations;
-
+    document.getElementById("manyauthors").textContent =
+        data.many_authors;
 })
 .catch(error => {
     console.log("Could not load metrics:", error);
