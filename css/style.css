@@ -10,15 +10,9 @@ text-align: center;
 
 }
 
-.about-text {
-    text-align: justify;
-}
+.about-text{text-align: justify;}
 
-video,
-img {
+video, img {border-radius: 8px;}
 
-border-radius: 8px;
-
-}
 .profile-photo{width:280px;max-width:80%;}
 body{background:#050816;color:white;}
