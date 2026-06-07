@@ -1,62 +1,166 @@
+#!/usr/bin/env python3
+
 import json
-import re
+import sys
 
-with open("data/All-publications.bib", "r", encoding="utf-8") as f:
-    text = f.read()
+try:
+    import bibtexparser
+except ImportError:
+    print("Please install bibtexparser:")
+    print("pip install bibtexparser")
+    sys.exit(1)
 
-# Split on BibTeX entries
-entries = re.split(r'@\w+\{', text)[1:]
+# Check bibtexparser version and import appropriate functions
+try:
+    from bibtexparser import parse_string
+    USE_NEW_API = True
+except ImportError:
+    USE_NEW_API = False
 
-papers = []
-
-for entry in entries:
-
-    title = ""
-    journal = ""
-    year = ""
-    authors = []
-
-    m = re.search(r'title\s*=\s*\{(.*?)\}', entry, re.S)
-    if m:
-        title = " ".join(m.group(1).replace("\n", " ").split())
-
-    m = re.search(r'journal\s*=\s*\{(.*?)\}', entry, re.S)
-    if m:
-        journal = m.group(1).strip()
-
-    m = re.search(r'year\s*=\s*([0-9]{4})', entry)
-    if m:
-        year = m.group(1)
-
-    m = re.search(r'author\s*=\s*\{(.*?)\},', entry, re.S)
-    if m:
-        authors = [a.strip() for a in m.group(1).split(" and ")]
-
-    papers.append({
-        "title": title,
-        "authors": authors,
-        "year": year,
-        "journal": journal,
-        "first_author": (
-            len(authors) > 0 and "Dihingia" in authors[0]
-        ),
-        "many_authors": (
-            len(authors) > 10
-        )
-    })
-
-papers.sort(key=lambda p: str(p["year"]), reverse=True)
-
-with open("data/publications.json", "w", encoding="utf-8") as f:
-    json.dump(papers, f, indent=2, ensure_ascii=False)
-
-metrics = {
-    "total_publications": len(papers),
-    "first_author": sum(p["first_author"] for p in papers),
-    "many_authors": sum(p["many_authors"] for p in papers)
+# Use raw strings (r"") to avoid escape sequence warnings
+JOURNALS = {
+    r"\apj": "The Astrophysical Journal",
+    r"\apjl": "The Astrophysical Journal Letters",
+    r"\apjs": "The Astrophysical Journal Supplement Series",
+    r"\aj": "The Astronomical Journal",
+    r"\mnras": "Monthly Notices of the Royal Astronomical Society",
+    r"\aap": "Astronomy & Astrophysics",
+    r"\nat": "Nature",
+    r"\sci": "Science",
 }
 
-with open("data/metrics.json", "w", encoding="utf-8") as f:
-    json.dump(metrics, f, indent=2)
+def clean_text(text):
+    if not text:
+        return ""
 
-print(f"Processed {len(papers)} papers")
+    text = text.replace("{", "")
+    text = text.replace("}", "")
+
+    return " ".join(text.split())
+
+def clean_author(author):
+    return clean_text(author)
+
+def journal_name(journal):
+    journal = clean_text(journal)
+
+    if journal in JOURNALS:
+        return JOURNALS[journal]
+
+    return journal
+
+def is_first_author(authors):
+    if len(authors) == 0:
+        return False
+
+    return "dihingia" in authors[0].lower()
+
+def display_authors(authors):
+    authors = [clean_author(a) for a in authors]
+
+    if len(authors) <= 3:
+        return ", ".join(authors)
+
+    return ", ".join(authors[:3]) + " et al."
+
+def load_bib_file(bibfile):
+    """Load bib file using the appropriate API for the installed version"""
+    
+    with open(bibfile, "r", encoding="utf-8") as f:
+        bib_content = f.read()
+    
+    if USE_NEW_API:
+        # For newer versions (1.4.0+)
+        return parse_string(bib_content)
+    else:
+        # For older versions (pre-1.4.0)
+        return bibtexparser.loads(bib_content)
+
+def main():
+    bibfile = (
+        sys.argv[1]
+        if len(sys.argv) > 1
+        else "data/All-publications.bib"
+    )
+
+    outfile = (
+        sys.argv[2]
+        if len(sys.argv) > 2
+        else "data/publications.json"
+    )
+
+    # Load the bib file using the appropriate method
+    bib_database = load_bib_file(bibfile)
+
+    papers = []
+
+    for entry in bib_database.entries:
+        authors = []
+
+        if "author" in entry:
+            authors = [
+                a.strip()
+                for a in entry["author"].split(" and ")
+            ]
+
+        url = entry.get("adsurl", "")
+
+        if not url:
+            doi = entry.get("doi", "")
+            if doi:
+                url = "https://doi.org/" + doi
+
+        paper = {
+            "title": clean_text(entry.get("title", "")),
+            "url": url,
+            "authors": [clean_author(a) for a in authors],
+            "display_authors": display_authors(authors),
+            "year": str(entry.get("year", "")),
+            "journal": journal_name(
+                entry.get("journal", "")
+            ),
+            "volume": clean_text(
+                entry.get("volume", "")
+            ),
+            "pages": clean_text(
+                entry.get(
+                    "pages",
+                    entry.get("eid", "")
+                )
+            ),
+            "first_author": is_first_author(authors),
+            "many_authors": len(authors) > 10,
+        }
+
+        papers.append(paper)
+
+    papers.sort(
+        key=lambda p: p["year"],
+        reverse=True
+    )
+
+    # Ensure the output directory exists
+    import os
+    os.makedirs(os.path.dirname(outfile) or ".", exist_ok=True)
+
+    with open(
+        outfile,
+        "w",
+        encoding="utf-8"
+    ) as f:
+        json.dump(
+            papers,
+            f,
+            indent=2,
+            ensure_ascii=False
+        )
+
+    print(
+        f"Processed {len(papers)} papers"
+    )
+    print(
+        f"Written to {outfile}"
+    )
+
+if __name__ == "__main__":
+    main()
