@@ -16,5 +16,5 @@ img {
 border-radius: 8px;
 
 }
-
-body{background:#050816;color:white;font-family:Arial} a{color:#38bdf8} .navbar{margin-bottom:20px}
+.profile-photo{width:280px;max-width:80%;}
+body{background:#050816;color:white;}
