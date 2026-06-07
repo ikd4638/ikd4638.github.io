@@ -1,0 +1,51 @@
+name: Update ADS Publications
+
+on:
+  workflow_dispatch:  # Allows manual trigger (for immediate testing)
+  schedule:
+    - cron: '0 0 1 * *'  # Auto-runs at midnight on the 1st of every month
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write  # Required to push changes
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          pip install requests
+      
+      - name: Create data directory
+        run: |
+          mkdir -p data
+      
+      - name: Run ADS updater
+        env:
+          ADS_API_TOKEN: ${{ secrets.ADS_API_TOKEN }}
+        run: |
+          python scripts/update_ads.py
+      
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Only commit if there are changes
+          if [[ -n "$(git status --porcelain data/)" ]]; then
+            git add data/publications.json data/metrics.json
+            git commit -m "Auto-update ADS publications: $(date +'%Y-%m-%d')"
+            git push
+            echo "✅ Changes committed and pushed"
+          else
+            echo "📭 No changes detected"
+          fi
