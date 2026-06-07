@@ -16,3 +16,46 @@ video, img {border-radius: 8px;}
 
 .profile-photo{width:280px;max-width:80%;}
 body{background:#050816;color:white;}
+
+.timeline {
+border-left: 3px solid #666;
+margin-left: 30px;
+padding-left: 30px;
+}
+
+.timeline-item {
+position: relative;
+margin-bottom: 30px;
+}
+
+.timeline-item::before {
+content: "";
+position: absolute;
+left: -39px;
+top: 6px;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+background: #ccc;
+}
+
+.timeline-year {
+font-size: 1.3rem;
+font-weight: bold;
+color: #f8f9fa;
+margin-bottom: 15px;
+}
+
+.timeline-entry {
+margin-bottom: 15px;
+}
+
+.timeline-entry em {
+font-size: 1.05rem;
+}
+
+.timeline-entry strong {
+display: block;
+color: #cccccc;
+}
+
