@@ -8,6 +8,81 @@ body {
     padding: 0;
 }
 
+/* ============================================ */
+/* HOMEPAGE IMPROVEMENTS */
+/* ============================================ */
+
+/* Section titles */
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, transparent);
+    border-radius: 3px;
+}
+
+/* Sticky navbar */
+.sticky-top {
+    backdrop-filter: blur(10px);
+}
+
+/* Card improvements for homepage */
+.card {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-img-top {
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.02);
+}
+
+/* Button improvements */
+.btn-outline-primary {
+    border-color: #3b82f6;
+    color: #60a5fa;
+}
+
+.btn-outline-primary:hover {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+/* Badge styling */
+.badge {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+/* Footer */
+footer {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+footer a:hover {
+    color: #60a5fa !important;
+}
+
 /* Improved text justification */
 .about-text {
     text-align: justify;
