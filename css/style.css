@@ -725,3 +725,6 @@ footer {
         font-size: 0.8rem;
     }
 }
+.text-muted {
+    color: #cbd5e1 !important;
+}
