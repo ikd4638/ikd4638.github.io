@@ -259,12 +259,15 @@ html {
     background: #60a5fa;
 }
 
-/* ============================================ */
-/* CONTACT PAGE SPECIFIC STYLES - ADDITIONS */
+//* ============================================ */
+/* CONTACT PAGE CARD STYLES - OPTIMAL SOLUTION */
 /* ============================================ */
 
-/* Card hover effects for contact page */
+/* Card base styling */
 .card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -273,82 +276,74 @@ html {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Email links styling */
-.email-link {
-    word-break: break-all;
-    font-size: 1.1rem;
+/* Card text colors */
+.card-body {
+    color: #e2e8f0;
+    padding: 1.5rem;
 }
 
-.email-link:hover {
-    text-decoration: underline;
+.card-body strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Card titles */
+.card-title {
+    color: #60a5fa !important;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
 }
 
 /* Address styling */
-address {
+.card-body address {
+    color: #e2e8f0;
+    font-style: normal;
     line-height: 1.8;
     margin-bottom: 0;
 }
 
-/* Card title styling */
-.card-title {
-    margin-top: 0;
-    margin-bottom: 0.75rem;
-}
-
-/* Button variants for contact page */
-.btn-outline-primary {
-    background: transparent;
-    border: 2px solid #3b82f6;
+/* Email links */
+.card-body a:not(.btn) {
     color: #60a5fa;
-    padding: 10px 20px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.btn-outline-primary:hover {
-    background-color: #3b82f6;
-    border-color: #3b82f6;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    word-break: break-all;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.btn-danger {
-    background: linear-gradient(135deg, #dc2626, #b91c1c);
-    border: none;
-    padding: 10px 24px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+.card-body a:not(.btn):hover {
+    color: #93c5fd;
+    text-decoration: underline;
 }
 
-.btn-danger:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
-    text-decoration: none;
-}
-
-/* Alert styling for office hours */
+/* Alert/office hours styling */
 .alert {
+    background: rgba(30, 41, 59, 0.5);
     border: 1px solid rgba(59, 130, 246, 0.3);
     border-radius: 12px;
+    color: #cbd5e1;
 }
 
-.alert-secondary {
-    background: rgba(30, 41, 59, 0.5);
+.alert h6 {
+    color: #60a5fa;
+    margin-bottom: 8px;
 }
 
-/* Text utilities */
-.text-primary {
-    color: #60a5fa !important;
+/* Remove bg-dark class interference if accidentally added */
+.card.bg-dark,
+.card.bg-dark .card-body {
+    background: transparent;
 }
 
-.text-muted {
-    color: #94a3b8 !important;
-}
-
-.small {
-    font-size: 0.875rem;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
 }
 
 /* ============================================ */
