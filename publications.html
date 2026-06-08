@@ -1,59 +1,146 @@
-<!doctype html><html><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet'>
-<link rel='stylesheet' href='css/style.css'></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link rel='stylesheet' href='css/style.css'>
+    <title>Publications - Indu Kalpa Dihingia</title>
+</head>
+<body>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<div class="container">
-<a class="navbar-brand" href="index.html">Indu Kalpa Dihingia</a>
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarNav">
-<ul class="navbar-nav ms-auto">
-<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
-<li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
-<li class="nav-item"><a class="nav-link" href="teaching.html">Teaching</a></li>
-<li class="nav-item"><a class="nav-link" href="talks.html">Talks</a></li>
-<li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-</ul></div></div></nav>
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Indu Kalpa Dihingia</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+                <li class="nav-item"><a class="nav-link active" href="publications.html">Publications</a></li>
+                <li class="nav-item"><a class="nav-link" href="teaching.html">Teaching</a></li>
+                <li class="nav-item"><a class="nav-link" href="talks.html">Talks</a></li>
+                <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="container py-4">
-<div class="row align-items-center">
-<div class="col-lg-3 text-center">
-<img src="images/DP.png" class="img-fluid rounded-circle profile-photo">
+    <!-- Profile section -->
+    <div class="row align-items-center">
+        <div class="col-lg-3 text-center">
+            <img src="images/DP.png" class="img-fluid rounded-circle profile-photo" alt="Indu Kalpa Dihingia">
+        </div>
+        <div class="col-lg-9">
+            <h1>Indu Kalpa Dihingia</h1>
+            <h4>Associate Professor (Research)</h4>
+            <p>Institute of Fundamental Physics and Quantum Technology & School of Physical Science and Technology, Ningbo University, China</p>
+            <p>
+                <a href="https://scholar.google.com/citations?user=0T0tQPYAAAAJ&hl=en">Scholar</a> |
+                <a href="https://ui.adsabs.harvard.edu/search/fq=%7B!type%3Daqp%20v%3D%24fq_database%7D&fq_database=database%3A%20astronomy&q=author%3A(%22Dihingia%22)&sort=date%20desc%2C%20bibcode%20desc&p_=0">ADS</a> |
+                <a href="https://inspirehep.net/authors/1900656">INSPIRE</a>
+            </p>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <h2>Publications</h2>
+    
+    <!-- Statistics summary -->
+    <div class="row mb-4" id="stats-summary">
+        <div class="col-md-3 col-sm-6 mb-2">
+            <div class="metric-card">
+                <h3 id="total-count">--</h3>
+                <p class="text-muted mb-0">Total Publications</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-2">
+            <div class="metric-card">
+                <h3 id="first-count">--</h3>
+                <p class="text-muted mb-0">First Author</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-2">
+            <div class="metric-card">
+                <h3 id="many-count">--</h3>
+                <p class="text-muted mb-0">&gt;10 Authors</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-2">
+            <div class="metric-card">
+                <h3 id="total-cites">--</h3>
+                <p class="text-muted mb-0">Total Citations</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Filter and search section -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-8 mb-2 mb-md-0">
+                    <div class="btn-group flex-wrap" role="group">
+                        <button class="btn btn-primary active" onclick="filterPublications('all')">
+                            📚 All
+                        </button>
+                        <button class="btn btn-primary" onclick="filterPublications('first')">
+                            ✍️ First Author
+                        </button>
+                        <button class="btn btn-primary" onclick="filterPublications('many')">
+                            👥 &gt;10 Authors
+                        </button>
+                        <button class="btn btn-primary" onclick="filterPublications('recent')">
+                            📅 Recent (2024-2025)
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control bg-dark text-light border-secondary"
+                           id="search-input" placeholder="🔍 Search by title, journal, or author..."
+                           onkeyup="searchPublications()">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sort options -->
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+        <div class="btn-group btn-group-sm mb-2 mb-sm-0">
+            <button class="btn btn-outline-secondary active" onclick="sortPublications('year')">
+                Sort by Year ▼
+            </button>
+            <button class="btn btn-outline-secondary" onclick="sortPublications('citations')">
+                Sort by Citations ▼
+            </button>
+            <button class="btn btn-outline-secondary" onclick="sortPublications('title')">
+                Sort by Title ▼
+            </button>
+        </div>
+        <span class="text-muted small" id="result-count"></span>
+    </div>
+    
+    <!-- Publications list -->
+    <div id="papers"></div>
+    
+    <!-- Loading indicator -->
+    <div id="loading" class="text-center py-5" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2 text-muted">Loading publications...</p>
+    </div>
+    
+    <!-- No results message -->
+    <div id="no-results" class="text-center py-5" style="display: none;">
+        <p class="text-muted">No publications found matching your criteria.</p>
+    </div>
 </div>
-<div class="col-lg-9">
-<h1>Indu Kalpa Dihingia</h1>
-<h4>Associate Professor (Research)</h4>
-<p>Institute of Fundamental Physics and Quantum Technology & School of Physical Science and Technology, Ningbo University, China</p>
-<p><a href="https://scholar.google.com/citations?user=0T0tQPYAAAAJ&hl=en">Scholar</a> |
-<a href="https://ui.adsabs.harvard.edu/search/fq=%7B!type%3Daqp%20v%3D%24fq_database%7D&fq_database=database%3A%20astronomy&q=author%3A(%22Dihingia%22)&sort=date%20desc%2C%20bibcode%20desc&p_=0">ADS</a> |
-<a href="https://inspirehep.net/authors/1900656">INSPIRE</a></p>
-</div></div><hr>
 
-<h1>Publications</h1>
-
-<div class="mb-3">
-
-<button class="btn btn-primary me-2" onclick="showAll()">
-All Publications
-</button>
-
-<button class="btn btn-primary me-2" onclick="showFirstAuthor()">
-First Author
-</button>
-
-<button class="btn btn-primary" onclick="showManyAuthors()">
->10 Authors
-</button>
-
-</div>
-
-<div id="papers"></div>
-
-</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/publications.js"></script>
 

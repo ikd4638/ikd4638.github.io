@@ -347,47 +347,165 @@ html {
 }
 
 /* ============================================ */
-/* PUBLICATIONS PAGE SPECIFIC STYLES */
+/* PUBLICATIONS PAGE IMPROVEMENTS */
 /* ============================================ */
 
-/* Publication entry styling */
+/* Compact paper entries */
 .paper-entry {
-    margin-bottom: 25px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.paper-entry h5 {
+.paper-entry:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateX(4px);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Badge styling */
+.badge {
+    font-weight: 500;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    border-radius: 20px;
+}
+
+.badge-primary {
+    background: #3b82f6;
+}
+
+.badge-info {
+    background: #06b6d4;
+}
+
+.badge-warning {
+    background: #f59e0b;
+    color: #1e293b;
+}
+
+.badge-success {
+    background: #10b981;
+}
+
+.badge-secondary {
+    background: #475569;
+}
+
+/* Metric cards */
+.metric-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.metric-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-3px);
+}
+
+.metric-card h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #60a5fa;
+    margin-bottom: 5px;
     margin-top: 0;
-    margin-bottom: 10px;
 }
 
-.paper-entry .authors {
+/* Author and journal text */
+.authors {
     color: #cbd5e1;
-    font-size: 0.95rem;
-    margin-bottom: 8px;
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
-.paper-entry .journal {
+.journal {
     color: #94a3b8;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-style: italic;
 }
 
-.paper-entry .citations {
-    color: #60a5fa;
-    font-size: 0.9rem;
-    font-weight: 500;
+/* Search input */
+.form-control:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+    outline: none;
 }
 
-/* Citation badge */
-.badge-citation {
+/* Button group improvements */
+.btn-group .btn-primary {
     background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
     color: #60a5fa;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    display: inline-block;
 }
 
+.btn-group .btn-primary.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+.btn-group .btn-primary:hover {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-outline-secondary {
+    border-color: #475569;
+    color: #94a3b8;
+}
+
+.btn-outline-secondary.active {
+    background: #475569;
+    border-color: #475569;
+    color: white;
+}
+
+.btn-outline-secondary:hover {
+    background: #334155;
+    border-color: #334155;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .paper-entry {
+        padding: 12px 15px;
+    }
+    
+    .metric-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .btn-group {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .btn-group .btn {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+    
+    .paper-entry h5 {
+        font-size: 0.95rem;
+    }
+    
+    .authors, .journal {
+        font-size: 0.8rem;
+    }
+}
+
+/* Hover effect for paper titles */
+.hover-primary:hover {
+    color: #60a5fa !important;
+}
 /* ============================================ */
 /* METRICS CARDS STYLES */
 /* ============================================ */
