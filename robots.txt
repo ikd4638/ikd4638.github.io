@@ -1,0 +1,10 @@
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Specify sitemap location
+Sitemap: https://ikd4638.github.io/sitemap.xml
+
+# Block access to private directories (if any)
+# Disallow: /private/
+# Disallow: /admin/
