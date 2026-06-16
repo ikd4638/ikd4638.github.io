@@ -41,5 +41,5 @@
     }
   ],
   "categories": ["education", "science"],
-  "prefer_related_applications": false
+  "prefer_related_applications": true
 }
