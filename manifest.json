@@ -1,12 +1,13 @@
 {
+  "id": "/",
   "name": "Indu Kalpa Dihingia - Astrophysicist",
-  "short_name": "IKD Physics",
-  "description": "Research portfolio of Indu Kalpa Dihingia, Associate Professor (Research) at Ningbo University, specializing in black hole accretion, GRMHD simulations, and high-energy astrophysics",
+  "short_name": "IKD",
+  "description": "Research portfolio of Indu Kalpa Dihingia, Associate Professor (Research) at Ningbo University, specializing in black hole accretion, GRMHD simulations, and high-energy astrophysics. View publications, research, teaching, and contact information.",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "theme_color": "#3b82f6",
   "background_color": "#050816",
-  "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en",
   "icons": [
@@ -25,9 +26,18 @@
   ],
   "screenshots": [
     {
-      "src": "images/screenshot-mobile.png",
+      "src": "images/screenshot-1.png",
       "sizes": "1080x1920",
-      "type": "image/png"
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Homepage of Indu Kalpa Dihingia"
+    },
+    {
+      "src": "images/screenshot-2.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Publications page"
     }
   ],
   "categories": ["education", "science"],
