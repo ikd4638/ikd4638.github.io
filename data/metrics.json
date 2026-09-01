@@ -1,10 +1,10 @@
 {
-  "total_publications": 63,
+  "total_publications": 64,
   "first_author_publications": 21,
   "papers_with_many_authors": 20,
-  "total_citations": 1203,
+  "total_citations": 1230,
   "h_index": 18,
-  "i10_index": 29,
-  "average_citations_per_paper": 19.1,
-  "last_updated": "2026-08-01T03:22:53.660318"
+  "i10_index": 31,
+  "average_citations_per_paper": 19.22,
+  "last_updated": "2026-09-01T04:24:06.332288"
 }
